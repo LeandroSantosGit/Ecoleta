@@ -18,6 +18,7 @@ interface Point {
   id: number;
   name: string;
   image: string;
+  image_url: string;
   latitude: number;
   longitude: number;
 }
@@ -67,7 +68,7 @@ const Points = () => {
         params: {
           uf: routeParams.uf,
           city: routeParams.city,
-          items: [1, 2]
+          items: selectedItems
         }
       }).then(response => {
           setPoints(response.data);
@@ -108,8 +109,8 @@ const Points = () => {
                                initialRegion={{ 
                                     latitude: initialPosition[0],
                                     longitude: initialPosition[1],
-                                    latitudeDelta: 0.16,
-                                    longitudeDelta: 0.16,
+                                    latitudeDelta: 0.18,
+                                    longitudeDelta: 0.18,
                                }}>
                           {points.map(point => (
                             <Marker key={String(point.id)}
@@ -121,8 +122,7 @@ const Points = () => {
                                         }}>
                                 <View style={styles.mapMarkerContainer}>
                                     <Image style={styles.mapMarkerImage}
-                                          source={{ uri: point.image }}
-                                    />
+                                          source={{ uri: point.image_url }}/>
                                     <Text style={styles.mapMarkerTitle}>{point.name}</Text>
                                 </View>
                             </Marker>
